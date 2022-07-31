@@ -2,7 +2,7 @@
 # NOTE: DO *NOT* EDIT THIS FILE.  IT IS GENERATED.
 # PLEASE UPDATE Dockerfile.txt INSTEAD OF THIS FILE
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-FROM selenium/base:3.141.59-20210929
+FROM pczerkas/selenium-base:3.200.11-20220731
 LABEL authors=SeleniumHQ
 
 USER root
@@ -14,6 +14,15 @@ RUN apt-get update -qqy \
   && apt-get -qqy install \
     xvfb \
     pulseaudio \
+  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+
+#=========
+# fluxbox
+# A fast, lightweight and responsive window manager
+#=========
+RUN apt-get update -qqy \
+  && apt-get -qqy install \
+    fluxbox \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 #==============================
@@ -89,7 +98,6 @@ COPY start-selenium-node.sh \
 #==============================
 COPY selenium.conf /etc/supervisor/conf.d/
 
-
 #============================
 # Some configuration options
 #============================
@@ -98,6 +106,7 @@ ENV SCREEN_HEIGHT 1020
 ENV SCREEN_DEPTH 24
 ENV SCREEN_DPI 96
 ENV DISPLAY :99.0
+ENV DISPLAY_NUM 99
 ENV START_XVFB true
 
 #========================

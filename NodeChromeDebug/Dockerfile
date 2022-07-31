@@ -2,7 +2,7 @@
 # NOTE: DO *NOT* EDIT THIS FILE.  IT IS GENERATED.
 # PLEASE UPDATE Dockerfile.txt INSTEAD OF THIS FILE
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-FROM selenium/node-chrome:3.141.59-20210929
+FROM pczerkas/selenium-node-chrome:3.200.11-20220731
 LABEL authors=SeleniumHQ
 
 USER root
@@ -13,15 +13,6 @@ USER root
 RUN apt-get update -qqy \
   && apt-get -qqy install \
   x11vnc \
-  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
-
-#=========
-# fluxbox
-# A fast, lightweight and responsive window manager
-#=========
-RUN apt-get update -qqy \
-  && apt-get -qqy install \
-    fluxbox \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 USER 1200
@@ -44,8 +35,7 @@ RUN sudo chmod -R 777 ${HOME} \
 #==============================
 # Scripts to run fluxbox and x11vnc
 #==============================
-COPY start-fluxbox.sh \
-      start-vnc.sh \
+COPY start-vnc.sh \
       /opt/bin/
 
 #==============================

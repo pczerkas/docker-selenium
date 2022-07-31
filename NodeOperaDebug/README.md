@@ -4,7 +4,7 @@ _This image is only intended for development purposes!_ Runs a Selenium Grid Nod
 
 ## Dockerfile
 
-[`selenium/node-opera-debug` Dockerfile](Dockerfile)
+[`selenium/selenium-node-opera-debug` Dockerfile](Dockerfile)
 
 ## How to use this image
 
@@ -17,7 +17,7 @@ $ docker run -d -p 4444:4444 --name selenium-hub selenium/hub
 Once the hub is up and running will want to launch nodes that can run tests.
 
 ```
-$ docker run -d -p 5900:5900 --link selenium-hub:hub -v /dev/shm:/dev/shm selenium/node-opera-debug
+$ docker run -d -p 5900:5900 --link selenium-hub:hub -v /dev/shm:/dev/shm selenium/selenium-node-opera-debug
 ```
 
 You can acquire the port that the VNC server is exposed to by running:
@@ -37,7 +37,7 @@ If you are running Boot2Docker on Mac then you already have a [VNC client](http:
 When you are prompted for the password it is __secret__. If you wish to change this then you should either change it in the `/NodeBase/Dockerfile` and build the images yourself, or you can define a docker image that derives from the posted ones which reconfigures it:
 
 ``` dockerfile
-FROM selenium/node-opera-debug:3.141.59-20210929
+FROM selenium/selenium-node-opera-debug:3.141.59-20210929
 
 RUN x11vnc -storepasswd <your-password-here> /home/seluser/.vnc/passwd
 ```

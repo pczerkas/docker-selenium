@@ -86,3 +86,11 @@ class OperaTests(SeleniumGenericTests):
         self.driver = webdriver.Remote(
             desired_capabilities=capabilities
         )
+
+class EdgeTests(SeleniumGenericTests):
+    def setUp(self):
+        capabilities = DesiredCapabilities.CHROME
+        capabilities['browserName'] = 'MicrosoftEdge'
+        self.driver = webdriver.Remote(
+            desired_capabilities=capabilities
+        )

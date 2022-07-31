@@ -1,45 +1,16 @@
-# Selenium Grid Node - Firefox Debug
+# Selenium Grid Standalone - Edge
 
-_This image is only intended for development purposes!_ Runs a Selenium Grid Node with a VNC Server to allow you to visually see the browser being automated. Since it runs additional services to support this it is too heavy weight for usage within a Selenium Grid cluster.
+Selenium Standalone Server with Edge
 
 ## Dockerfile
 
-[`selenium/selenium-node-firefox-debug` Dockerfile](Dockerfile)
+[`selenium/standalone-edge` Dockerfile](Dockerfile)
 
 ## How to use this image
 
-First, you will need a Selenium Grid Hub that the Node will connect to.
 
 ```
-$ docker run -d -p 4444:4444 --name selenium-hub selenium/hub
-```
-
-Once the hub is up and running will want to launch nodes that can run tests.
-
-```
-$ docker run -d -p 5900:5900 --link selenium-hub:hub -v /dev/shm:/dev/shm selenium/selenium-node-firefox-debug
-```
-
-You can acquire the port that the VNC server is exposed to by running:
-(Assuming that we mapped the ports like this: 49338:5900)
-``` bash
-$ docker port <container-name|container-id> 5900
-#=> 0.0.0.0:49338
-```
-
-In case you have [RealVNC](https://www.realvnc.com/) binary `vnc` in your path, you can always take a look, view only to avoid messing around your tests with an unintended mouse click or keyboard interrupt:
-``` bash
-$ ./bin/vncview 127.0.0.1:49338
-```
-
-If you are running Boot2Docker on Mac then you already have a [VNC client](http://www.davidtheexpert.com/post.php?id=5) built-in. You can connect by entering `vnc://<boot2docker-ip>:49160` in Safari or [Alfred](http://www.alfredapp.com/)
-
-When you are prompted for the password it is __secret__. If you wish to change this then you should either change it in the `/NodeBase/Dockerfile` and build the images yourself, or you can define a docker image that derives from the posted ones which reconfigures it:
-
-``` dockerfile
-FROM selenium/selenium-node-firefox-debug:3.141.59-20210929
-
-RUN x11vnc -storepasswd <your-password-here> /home/seluser/.vnc/passwd
+$ docker run -d -p 4444:4444 -v /dev/shm:/dev/shm selenium/standalone-edge
 ```
 
 ## What is Selenium?

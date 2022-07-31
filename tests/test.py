@@ -42,6 +42,12 @@ IMAGE_NAME_MAP = {
     'NodeOperaDebug': 'node-opera-debug',
     'StandaloneOpera': 'standalone-opera',
     'StandaloneOperaDebug': 'standalone-opera-debug',
+
+    # Edge Images
+    'NodeEdge': 'node-edge',
+    'NodeEdgeDebug': 'node-edge-debug',
+    'StandaloneEdge': 'standalone-edge',
+    'StandaloneEdgeDebug': 'standalone-edge-debug',
 }
 
 TEST_NAME_MAP = {
@@ -62,6 +68,12 @@ TEST_NAME_MAP = {
     'NodeOperaDebug': 'OperaTests',
     'StandaloneOpera': 'OperaTests',
     'StandaloneOperaDebug': 'OperaTests',
+
+    # Edge Images
+    'NodeEdge': 'EdgeTests',
+    'NodeEdgeDebug': 'EdgeTests',
+    'StandaloneEdge': 'EdgeTests',
+    'StandaloneEdgeDebug': 'EdgeTests',
 }
 
 
@@ -113,13 +125,19 @@ def launch_container(container, **kwargs):
 
     # Run the container
     logger.info("Running %s container..." % container)
+    # Merging env vars
+    environment = {
+        'http_proxy': http_proxy,
+        'https_proxy': https_proxy,
+        'no_proxy': no_proxy
+    }
+    if 'EdgeTests' == TEST_NAME_MAP.get(container):
+        environment['JAVA_OPTS'] = '-Dwebdriver.edge.driver=/usr/bin/msedgedriver'
+
     container_id = client.containers.run("%s/%s:%s" % (NAMESPACE, IMAGE_NAME_MAP[container], VERSION),
                                          detach=True,
-                                         environment={
-                                             'http_proxy': http_proxy,
-                                             'https_proxy': https_proxy,
-                                             'no_proxy': no_proxy
-                                         },
+                                         environment=environment,
+                                         shm_size="2G",
                                          **kwargs).short_id
     logger.info("%s up and running" % container)
     return container_id
