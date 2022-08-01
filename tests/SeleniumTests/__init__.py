@@ -87,6 +87,10 @@ class OperaTests(SeleniumGenericTests):
             desired_capabilities=capabilities
         )
 
+    def test_play_video(self):
+        # disabled on Opera
+        pass
+
 class EdgeTests(SeleniumGenericTests):
     def setUp(self):
         capabilities = DesiredCapabilities.CHROME

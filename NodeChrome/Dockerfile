@@ -2,7 +2,7 @@
 # NOTE: DO *NOT* EDIT THIS FILE.  IT IS GENERATED.
 # PLEASE UPDATE Dockerfile.txt INSTEAD OF THIS FILE
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-FROM pczerkas/selenium-node-base:3.200.11-20220731
+FROM pczerkas/selenium-node-base:3.200.12-20220801
 LABEL authors=SeleniumHQ
 
 USER root
