@@ -1,3 +1,5 @@
+# NAME=pczerkas VERSION=3.200.13-20221101 make all release tag_latest release_latest
+
 NAME := $(or $(NAME),$(NAME),selenium)
 VERSION := $(or $(VERSION),$(VERSION),3.141.59-20210929)
 NAMESPACE := $(or $(NAMESPACE),$(NAMESPACE),$(NAME))

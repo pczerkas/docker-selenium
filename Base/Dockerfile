@@ -71,7 +71,7 @@ COPY supervisord.conf /etc
 RUN  mkdir -p /opt/selenium /var/run/supervisor /var/log/supervisor \
   && touch /opt/selenium/config.json \
   && chmod -R 777 /opt/selenium /var/run/supervisor /var/log/supervisor /etc/passwd \
-  && wget --no-verbose https://github.com/pczerkas/selenium-backports/releases/download/selenium-3.200.12/selenium-server-standalone-3.200.12.jar \
+  && wget --no-verbose https://github.com/pczerkas/selenium-backports/releases/download/3.200.13/selenium-server-standalone-3.200.13.jar \
     -O /opt/selenium/selenium-server-standalone.jar \
   && chgrp -R 0 /opt/selenium ${HOME} /var/run/supervisor /var/log/supervisor \
   && chmod -R g=u /opt/selenium ${HOME} /var/run/supervisor /var/log/supervisor
