@@ -8,6 +8,15 @@ RUN apt-get update -qqy \
   x11vnc \
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
+#=========
+# fluxbox
+# A fast, lightweight and responsive window manager
+#=========
+RUN apt-get update -qqy \
+  && apt-get -qqy install \
+    fluxbox \
+  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+
 USER 1200
 
 #==============================
@@ -28,7 +37,8 @@ RUN sudo chmod -R 777 ${HOME} \
 #==============================
 # Scripts to run fluxbox and x11vnc
 #==============================
-COPY start-vnc.sh \
+COPY start-fluxbox.sh \
+      start-vnc.sh \
       /opt/bin/
 
 #==============================

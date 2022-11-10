@@ -5,7 +5,7 @@
 FROM ubuntu:bionic AS builder-codecs-ffmpeg
 RUN apt-get update -qqy && apt-get -qqy install chromium-codecs-ffmpeg-extra
 
-FROM pczerkas/selenium-node-base:3.200.13-20221101
+FROM pczerkas/selenium-node-base:3.200.14-20221110
 LABEL authors=SeleniumHQ
 
 USER root

@@ -2,7 +2,7 @@
 # NOTE: DO *NOT* EDIT THIS FILE.  IT IS GENERATED.
 # PLEASE UPDATE Dockerfile.txt INSTEAD OF THIS FILE
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-FROM pczerkas/selenium-node-chrome-debug:3.200.13-20221101
+FROM pczerkas/selenium-node-chrome-debug:3.200.14-20221110
 LABEL authors=SeleniumHQ
 
 USER 1200
