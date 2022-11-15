@@ -2,7 +2,7 @@
 # NOTE: DO *NOT* EDIT THIS FILE.  IT IS GENERATED.
 # PLEASE UPDATE Dockerfile.txt INSTEAD OF THIS FILE
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-FROM pczerkas/selenium-node-base:3.200.14-20221110
+FROM pczerkas/selenium-node-base:3.200.15-20221115
 LABEL authors=SeleniumHQ
 
 USER root
@@ -13,7 +13,8 @@ USER root
 # can specify versions by CHROME_VERSION;
 #  e.g. 97.0.4692.71-1
 #============================================
-ARG CHROME_VERSION="97.0.4692.71-1"
+#ARG CHROME_VERSION="97.0.4692.71-1"
+ARG CHROME_VERSION="90.0.4430.212-1"
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
   && apt-get update -qqy \
   && wget -q https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_VERSION}_amd64.deb \
@@ -33,7 +34,8 @@ USER 1200
 # can specify versions by CHROME_DRIVER_VERSION
 # Latest released version will be used by default
 #============================================
-ARG CHROME_DRIVER_VERSION
+#ARG CHROME_DRIVER_VERSION
+ARG CHROME_DRIVER_VERSION="90.0.4430.24"
 RUN if [ -z "$CHROME_DRIVER_VERSION" ]; \
   then CHROME_MAJOR_VERSION=$(google-chrome --version | sed -E "s/.* ([0-9]+)(\.[0-9]+){3}.*/\1/") \
     && CHROME_DRIVER_VERSION=$(wget --no-verbose -O - "https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_MAJOR_VERSION}"); \
