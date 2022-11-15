@@ -16,14 +16,22 @@ USER root
 #       latest (equivalent to google-chrome-stable)
 #       google-chrome-beta  (pull latest beta)
 #============================================
-ARG CHROME_VERSION="google-chrome-stable"
+# ARG CHROME_VERSION="google-chrome-stable"
+# RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+#   && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
+#   && apt-get update -qqy \
+#   && apt-get -qqy install \
+#     ${CHROME_VERSION:-google-chrome-stable} \
+#   && rm /etc/apt/sources.list.d/google-chrome.list \
+#   && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+
+# ARG CHROME_VERSION="97.0.4692.71-1"
+# ARG CHROME_VERSION="94.0.4606.41"
+ARG CHROME_VERSION="94.0.4606.54-1"
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-  && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
   && apt-get update -qqy \
-  && apt-get -qqy install \
-    ${CHROME_VERSION:-google-chrome-stable} \
-  && rm /etc/apt/sources.list.d/google-chrome.list \
-  && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
+  && wget -q https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_VERSION}_amd64.deb \
+  && apt-get install -y "./google-chrome-stable_${CHROME_VERSION}_amd64.deb" -f
 
 #=================================
 # Chrome Launch Script Wrapper
@@ -39,7 +47,8 @@ USER 1200
 # can specify versions by CHROME_DRIVER_VERSION
 # Latest released version will be used by default
 #============================================
-ARG CHROME_DRIVER_VERSION
+# ARG CHROME_DRIVER_VERSION
+ARG CHROME_DRIVER_VERSION="94.0.4606.41"
 RUN if [ -z "$CHROME_DRIVER_VERSION" ]; \
   then CHROME_MAJOR_VERSION=$(google-chrome --version | sed -E "s/.* ([0-9]+)(\.[0-9]+){3}.*/\1/") \
     && NO_SUCH_KEY=$(curl -ls https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_MAJOR_VERSION} | head -n 1 | grep -oe NoSuchKey) ; \
