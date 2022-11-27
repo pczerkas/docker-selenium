@@ -1,4 +1,4 @@
-# NAME=pczerkas VERSION=4.6.0 make all release tag_latest release_latest
+# NAME=pczerkas VERSION=4.6.0-chrome-94 BUILD_DATE=20221117 make all release tag_latest release_latest
 
 NAME := $(or $(NAME),$(NAME),selenium)
 CURRENT_DATE := $(shell date '+%Y%m%d')
